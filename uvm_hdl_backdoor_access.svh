@@ -16,7 +16,7 @@ class basic_test extends uvm_test;
   virtual function void build_phase(uvm_phase phase);
     super.build_phase(phase);
  
-    if (uvm_hdl_check_path ("tb.a.test.my_var"))
+   if (uvm_hdl_check_path ("tb.a.test.my_var")) // Checks that the given HDL path exists
       `uvm_info ("Test_HDL","Path tb.a.test.my_var exists", UVM_NONE);
  
  
@@ -27,28 +27,28 @@ class basic_test extends uvm_test;
    
    phase.raise_objection(this);
    
-   if (!uvm_hdl_deposit ("tb.a.test.my_var",5'h8))
+   if (!uvm_hdl_deposit ("tb.a.test.my_var",5'h8)) // Sets the given HDL path to the specified value.
       `uvm_error ("Test_HDL","Deposit failed for this path tb.a.test.my_var");
     `uvm_info (get_type_name(),$sformatf("deposit = %0h", tb.a.test.my_var), UVM_NONE);
    
    #50ns 
    
-   if (!uvm_hdl_deposit ("tb.a.test.my_var",5'h7))
+   if (!uvm_hdl_deposit ("tb.a.test.my_var",5'h7)) // Sets the given HDL path to the specified value.
       `uvm_error ("Test_HDL","Deposit failed for this path tb.a.test.my_var");
     `uvm_info (get_type_name(),$sformatf("deposit = %0h", tb.a.test.my_var), UVM_NONE);
     
     #50ns
-    if (!uvm_hdl_force ("tb.a.test.my_var",5'h10))
+   if (!uvm_hdl_force ("tb.a.test.my_var",5'h10)) // Forces the value on the given path.
       `uvm_error ("Test_HDL","Deposit failed for this path tb.a.test.my_var");
     `uvm_info (get_type_name(),$sformatf("force = %0h", tb.a.test.my_var), UVM_NONE);
     
-     uvm_hdl_force_time (force_me,5'h9,30);
+   uvm_hdl_force_time (force_me,5'h9,30); // Its a task.Forces the value on the given path for the specified amount of force_time.
     
     `uvm_info (get_type_name(),$sformatf("force_time = %0h", tb.a.test.my_var), UVM_NONE);
     
     #20ns
     
-    if (!uvm_hdl_read ("tb.a.test.my_var",read_var))
+   if (!uvm_hdl_read ("tb.a.test.my_var",read_var)) // Gets the value at the given path.
       `uvm_error ("Test_HDL","Deposit failed for this path tb.a.test.my_var");
     `uvm_info (get_type_name(),$sformatf("read value is %d", read_var), UVM_NONE);
     
